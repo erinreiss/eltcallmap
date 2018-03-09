@@ -79,7 +79,7 @@
 
   var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<h1>' + feature.properties.question + '</h1><p>' + feature.properties.caller + '  |  ' + feature.properties.town + '</p><p> Find more info <a href="' + feature.properties.site + '"target="_blank">here</a></p><iframe frameborder="no" height="200" scrolling="no" src="'+ feature.properties.link + '" width="100%"></iframe>')
+    .setHTML('<h1>' + feature.properties.question + '</h1><p>' + feature.properties.caller + '  |  ' + feature.properties.town + '</p><p> Find more info <a href="' + feature.properties.site + '"target="_blank">here</a> or listen below! </p><iframe frameborder="no" height="200" scrolling="no" src="'+ feature.properties.link + '" width="100%"></iframe>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
 });
