@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>ELT Caller Map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        display: block;
+        font-size: 1.5em;
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: -.7em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        font-weight: bold;
+        line-height: 1.4em;
+      }
+
+       h3 {
+        display: -webkit-box;
+        font-size: 1.2em;
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+        font-weight: normal;
+      }
+
+      p {
+        display: block;
+        -webkit-margin-before: 1em;
+        -webkit-margin-after: 1em;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .mapboxgl-popup-content {
+        width: 35vw;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id='map'></div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZXZlcnlsaXR0bGV0ZWUiLCJhIjoiY2plaW95cm1oM2E0bjJ3cWVlcG82eTE1bSJ9.aPyd6vz2vNaFZuKq8jFM9w'; // replace this with your access token
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/everylittletee/cjeiriguo12ds2sp3f6kp0x1r' // replace this with your style URL
+    });
+    
+
+  map.on('click', function(e) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ["calls2"] // replace this with the name of the layer
+  });
+  if (!features.length) {
+    return;
+  }
+
+  var feature = features[0];
+
+  console.log(feature.properties.link); 
+
+  var popup = new mapboxgl.Popup({ offset: [0, -15] })
+    .setLngLat(feature.geometry.coordinates)
+    .setHTML('<h1>' + feature.properties.question + '</h1><p>' + feature.properties.caller + '  |  ' + feature.properties.town + '</p><p>' + feature.properties.link + '</p><iframe frameborder="no" height="200" scrolling="no" src="'+ feature.properties.link + '" width="100%"></iframe>')
+    .setLngLat(feature.geometry.coordinates)
+    .addTo(map);
+});
+
+    </script>
+  </body>
+</html>
