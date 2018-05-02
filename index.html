@@ -61,13 +61,13 @@
     mapboxgl.accessToken = 'pk.eyJ1IjoiZXZlcnlsaXR0bGV0ZWUiLCJhIjoiY2plaW95cm1oM2E0bjJ3cWVlcG82eTE1bSJ9.aPyd6vz2vNaFZuKq8jFM9w'; // replace this with your access token
     var map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/everylittletee/cjeiriguo12ds2sp3f6kp0x1r' // replace this with your style URL
+      style: 'mapbox://styles/everylittletee/cjgmt3kna00052rpqhdreq8md' // replace this with your style URL
     });
-    
+  
 
   map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
-    layers: ["calls2"] // replace this with the name of the layer
+    layers: ["eltcalls"] // replace this with the name of the layer
   });
   if (!features.length) {
     return;
@@ -79,9 +79,10 @@
 
   var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<h1>' + feature.properties.question + '</h1><p>' + feature.properties.caller + '  |  ' + feature.properties.town + '</p><p> Find more info <a href="' + feature.properties.site + '"target="_blank">here</a> or listen below! </p><iframe frameborder="no" height="200" scrolling="no" src="'+ feature.properties.link + '" width="100%"></iframe>')
+    .setHTML('<h1>' + feature.properties.question + '</h1><p>' + feature.properties.caller + '  |  ' + feature.properties.town + '</p><p> Find more info <a href="' + feature.properties.site + '"target="_blank">here</a></p><iframe frameborder="no" height="200" scrolling="no" src="'+ feature.properties.link + '" width="100%"></iframe>')
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
+
 });
 
     </script>
